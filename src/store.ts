@@ -1,17 +1,12 @@
+import { configureStore } from "@reduxjs/toolkit";
+
 /* eslint-disable import/no-cycle */
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import reducer from "./reducer";
+import AppReducer from "./AppSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: reducer,
+    app: AppReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;

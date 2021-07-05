@@ -1,0 +1,4 @@
+#chess-board div {
+  transition: box-shadow 0.2s;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, Arial, sans-serif !important;
+}
