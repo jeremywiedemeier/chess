@@ -9,7 +9,7 @@ import { useViewport } from "./resources";
 const App: React.FC = () => {
   const { width } = useViewport();
 
-  return width > 1200 ? (
+  return width > 1100 ? (
     <div id="flex-wrapper">
       <div id="menu-wrapper" style={{ justifyContent: "flex-end" }}>
         <Menu

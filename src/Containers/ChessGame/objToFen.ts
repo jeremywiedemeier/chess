@@ -60,7 +60,7 @@ function pieceCodeToFen(piece: string) {
 
 // position object to FEN string
 // returns false if the obj is not a valid position object
-export function objToFen(obj: Position): false | string {
+export function objToFen(obj: { [key: string]: string }): false | string {
   if (!validPositionObject(obj)) return false;
 
   let fen = "";
