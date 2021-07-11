@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGameState, setGameState } from "../../AppSlice";
+import { startingFen } from "../../resources";
 import "./GameRecord.css";
 
 const GameRecord: React.FC = () => {
@@ -13,14 +14,19 @@ const GameRecord: React.FC = () => {
           <button
             type="button"
             className="record-cell"
+            key={record.fen}
             onClick={() => {
               if (
                 (gameState.playerColor === "white" && i % 2 === 0) ||
                 (gameState.playerColor === "black" && !(i % 2 === 0))
               ) {
-                gameState.game.load(gameState.history[i - 1].fen);
+                gameState.game.load(
+                  gameState.history[i - 1]?.fen || startingFen
+                );
               } else {
-                gameState.game.load(gameState.history[i - 2].fen);
+                gameState.game.load(
+                  gameState.history[i - 2]?.fen || startingFen
+                );
               }
               dispatch(
                 setGameState({
@@ -29,7 +35,7 @@ const GameRecord: React.FC = () => {
                     (gameState.playerColor === "white" && i % 2 === 0) ||
                     (gameState.playerColor === "black" && !(i % 2 === 0))
                       ? gameState.history.slice(0, i)
-                      : gameState.history.slice(0, i - 1),
+                      : gameState.history.slice(0, Math.max(i - 1, 0)),
                 })
               );
             }}

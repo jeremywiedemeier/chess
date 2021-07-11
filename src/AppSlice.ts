@@ -25,7 +25,7 @@ const initialState: AppState = {
   },
   chess: {
     game: new Chess(),
-    playerColor: "white",
+    playerColor: Math.random() > 0.5 ? "white" : "black",
     playerTurn: true,
     history: [],
   },

@@ -3,6 +3,7 @@ import Chessboard from "chessboardjsx";
 import "./ChessGame.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGameState, setGameState } from "../../AppSlice";
+import { startingFen } from "../../resources";
 
 const maxBoardWidth = 800;
 
@@ -10,7 +11,6 @@ const ChessGame: React.FC = () => {
   const dispatch = useDispatch();
   const gameState = useSelector(selectGameState);
   const fen = gameState.game.fen();
-  console.log(gameState.history);
 
   const getCompMove = (
     gameFen: string,
@@ -51,10 +51,7 @@ const ChessGame: React.FC = () => {
       });
   };
 
-  if (
-    fen === "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" &&
-    gameState.playerColor === "black"
-  ) {
+  if (fen === startingFen && gameState.playerColor === "black") {
     getCompMove(fen, null);
   }
 

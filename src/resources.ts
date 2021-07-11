@@ -22,6 +22,8 @@ export const getResourceUrl = (resource: string): string =>
     ? resource
     : `http://localhost:5000${resource}`;
 
+export const startingFen =
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 export const startingObj: Position = {
   a1: "wR",
   a2: "wP",
