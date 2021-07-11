@@ -1,14 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectGameState } from "../../AppSlice";
+import GameRecord from "../../Components/GameRecord";
 import "./Menu.css";
 
 const Menu: React.FC<Props> = ({ content }: Props) => {
-  return (
-    <div id="menu">
-      {/* <img alt="Change time" src="clock.png" />
-      <img alt="Reset game" src="reset.png" />
-      <img alt="Randomize side" src="sides.png" /> */}
-    </div>
-  );
+  const gameState = useSelector(selectGameState);
+  return <div id="menu">{content.records ? <GameRecord /> : null}</div>;
 };
 interface Props {
   content: {

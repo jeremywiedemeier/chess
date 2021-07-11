@@ -10,7 +10,7 @@ body, html, #root {
   color: #000;
 }
 
-h1, h2, h3, h4, h5, p, button, input {
+h1, h2, h3, h4, h5, p, button, input, span, div {
   font-weight: normal;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, Arial, sans-serif;
 }

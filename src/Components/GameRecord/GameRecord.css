@@ -1,0 +1,40 @@
+#game-record {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  margin: 10px auto;
+  flex-wrap: wrap;
+}
+.record-cell {
+  width: 50%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #caa98f;
+  font-size: large;
+  border: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.record-cell:hover, .record-cell:focus {
+  border-left: 4px solid #caa98f
+}
+
+.record-cell:nth-child(even) {
+  background-color: #caa98f;
+  color: white;
+}
+.record-cell:nth-child(even):hover, .record-cell:nth-child(even):focus {
+  border-left: 4px solid #a87952;
+}
+
+.record-cell:nth-child(2) {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.record-cell:last-child, .record-cell:nth-last-child(2) {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

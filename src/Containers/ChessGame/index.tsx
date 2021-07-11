@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Chessboard from "chessboardjsx";
-import { ChessInstance } from "chess.js";
 import "./ChessGame.css";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Chess = require("chess.js");
+import { useDispatch, useSelector } from "react-redux";
+import { selectGameState, setGameState } from "../../AppSlice";
 
 const maxBoardWidth = 800;
 
 const ChessGame: React.FC = () => {
-  const [gameState, setGameState] = useState<{
-    game: ChessInstance;
-    fen: string;
-    history: string[];
-  }>({
-    game: new Chess(),
-    fen: "start",
-    history: [],
-  });
+  const dispatch = useDispatch();
+  const gameState = useSelector(selectGameState);
+  const fen = gameState.game.fen();
+  console.log(gameState.history);
 
-  const getCompMove = (fen: string) => {
-    fetch(`http://localhost:5000/api/comp-move?fen=${fen}`)
+  const getCompMove = (
+    gameFen: string,
+    lastMove: { fen: string; move: string } | null
+  ) => {
+    fetch(`http://localhost:5000/api/comp-move?fen=${gameFen}`)
       .then((response) => response.json())
       .then((compMove) => {
         const move = gameState.game.move({
@@ -29,33 +25,70 @@ const ChessGame: React.FC = () => {
           promotion: "q",
         });
         if (move !== null) {
-          setGameState({
-            ...gameState,
-            fen: gameState.game.fen(),
-            history: gameState.game.history(),
-          });
+          dispatch(
+            setGameState({
+              ...gameState,
+              playerTurn: true,
+              history: lastMove
+                ? [
+                    ...gameState.history,
+                    lastMove,
+                    {
+                      fen: gameState.game.fen(),
+                      move: gameState.game.history().slice(-1)[0],
+                    },
+                  ]
+                : [
+                    ...gameState.history,
+                    {
+                      fen: gameState.game.fen(),
+                      move: gameState.game.history().slice(-1)[0],
+                    },
+                  ],
+            })
+          );
         }
       });
   };
 
+  if (
+    fen === "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" &&
+    gameState.playerColor === "black"
+  ) {
+    getCompMove(fen, null);
+  }
+
   return (
     <div id="chess-board">
       <Chessboard
-        position={gameState.game.fen()}
+        orientation={gameState.playerColor}
+        position={fen}
         onDrop={({ sourceSquare, targetSquare }) => {
-          const move = gameState.game.move({
-            from: sourceSquare,
-            to: targetSquare,
-            promotion: "q",
-          });
-          if (move !== null) {
-            const fen = gameState.game.fen();
-            setGameState({
-              ...gameState,
-              fen,
-              history: gameState.game.history(),
+          if (gameState.playerTurn) {
+            const move = gameState.game.move({
+              from: sourceSquare,
+              to: targetSquare,
+              promotion: "q",
             });
-            getCompMove(fen);
+            if (move !== null) {
+              dispatch(
+                setGameState({
+                  ...gameState,
+                  playerTurn: false,
+                  history: [
+                    ...gameState.history,
+                    {
+                      fen: gameState.game.fen(),
+                      move: gameState.game.history().slice(-1)[0],
+                    },
+                  ],
+                })
+              );
+              getCompMove(gameState.game.fen(), {
+                fen: gameState.game.fen(),
+                move: gameState.game.history().slice(-1)[0],
+              });
+            }
           }
         }}
         calcWidth={(size) =>
