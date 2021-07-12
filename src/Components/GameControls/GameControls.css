@@ -1,0 +1,49 @@
+#game-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#game-controls img {
+  height: 35px;
+  width: 35px;
+  transition: all 0.2s;
+  filter: invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
+}
+#game-controls #reset-wrapper:hover .reset {
+  transform: rotate(90deg);
+}
+#reset-wrapper {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+#reset-wrapper button {
+  background-color: #caa98f;
+  color: white;
+  height: 40px;
+  border-radius: 5px;
+  margin: 0 0 0 20px;
+  padding: 0 20px;
+  transition: all 0.2s;
+}
+#reset-wrapper button:hover {
+  background-color: #b68d6e;
+}
+
+#sides-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.sides-label {
+  border-radius: 5px;
+  min-width: 75px;
+  width: 100%;
+  max-width: 100px;
+  color: #b68d6e;
+  border-left: 2px solid #caa98f;
+  height: 40px;
+}
+.sides-label.active {
+  background-color: #caa98f;
+  color: white;
+}

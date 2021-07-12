@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { selectGameState, setGameState } from "../../AppSlice";
+import { useDispatch } from "react-redux";
+import { setGameState } from "../../AppSlice";
 import { startingFen } from "../../resources";
+import { GameState } from "../../types";
 import "./GameRecord.css";
 
-const GameRecord: React.FC = () => {
+const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
   const dispatch = useDispatch();
-  const gameState = useSelector(selectGameState);
   useEffect(() => {
     document
       .querySelector(".record-cell:last-child")
@@ -53,5 +53,9 @@ const GameRecord: React.FC = () => {
     </div>
   );
 };
+
+interface Props {
+  gameState: GameState;
+}
 
 export default GameRecord;

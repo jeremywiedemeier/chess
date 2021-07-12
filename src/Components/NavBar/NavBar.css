@@ -1,5 +1,5 @@
 #navbar {
-  height: 60px;
+  height: 80px;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -10,10 +10,10 @@
   color: #b68d6e;
   transition: all 0.3s;
   width: 20%;
-  height: 35px;
+  height: 40px;
   border-left: 2px solid #caa98f;
 }
-#navbar button:hover, #navbar button:focus {
+#navbar button:nth-child(odd):hover, #navbar button:nth-child(odd):focus {
   border-left: 4px solid #caa98f;
 }
 #navbar button:nth-child(even) {
@@ -22,5 +22,6 @@
   color: white;
 }
 #navbar button:nth-child(even):hover, #navbar button:nth-child(even):focus {
-  border-left: 4px solid #fafafa;
+  background-color: #b68d6e;
+  border-color: transparent;
 }

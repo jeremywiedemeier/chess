@@ -36,7 +36,8 @@
   color: white;
 }
 .record-cell:nth-child(even):hover, .record-cell:nth-child(even):focus {
-  border-left: 4px solid #fafafa;
+  background-color: #b68d6e;
+  border-color: transparent;
 }
 
 .record-cell:nth-child(2) {

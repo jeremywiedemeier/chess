@@ -6,10 +6,3 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   background-color: #fafafa;
 }
-#menu img {
-  height: 30px;
-  filter: invert(32%) sepia(10%) saturate(1439%) hue-rotate(300deg) brightness(90%) contrast(93%);
-}
-#module-wrapper {
-  flex-grow: 1;
-}

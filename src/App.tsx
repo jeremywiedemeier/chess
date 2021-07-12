@@ -15,8 +15,8 @@ const App: React.FC = () => {
         <Menu
           content={{
             navbar: true,
-            settings: true,
             gameControls: true,
+            engine: true,
             records: width < 1600,
           }}
         />
@@ -31,7 +31,7 @@ const App: React.FC = () => {
               <Menu
                 content={{
                   navbar: false,
-                  settings: false,
+                  engine: false,
                   gameControls: false,
                   records: true,
                 }}
@@ -48,7 +48,7 @@ const App: React.FC = () => {
       <Menu
         content={{
           navbar: true,
-          settings: true,
+          engine: true,
           gameControls: true,
           records: true,
         }}

@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ChessInstance } from "chess.js";
 // eslint-disable-next-line import/no-cycle
 import { RootState } from "./store";
+import { GameState } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Chess = require("chess.js");
@@ -11,12 +11,7 @@ interface AppState {
   UI: {
     darkTheme: boolean;
   };
-  chess: {
-    game: ChessInstance;
-    playerColor: "white" | "black";
-    playerTurn: boolean;
-    history: { fen: string; move: string }[];
-  };
+  chess: GameState;
 }
 
 const initialState: AppState = {
@@ -50,7 +45,6 @@ export const AppSlice = createSlice({
 export const { updateUI, setGameState } = AppSlice.actions;
 
 export const selectUI = (state: RootState): AppState["UI"] => state.app.UI;
-export const selectGameState = (state: RootState): AppState["chess"] =>
-  state.app.chess;
+export const selectGameState = (state: RootState): GameState => state.app.chess;
 
 export default AppSlice.reducer;
