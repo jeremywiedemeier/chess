@@ -1,4 +1,4 @@
-# FLASK_APP=/projects/chess/server/main.py env FLASK_ENV=development python -m flask run
+# env FLASK_APP=/projects/chess/server/main.py env FLASK_ENV=development python -m flask run
 import time
 
 from flask import Flask, request

@@ -1,4 +1,26 @@
 #navbar {
   height: 60px;
   width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#navbar button {
+  color: #b68d6e;
+  transition: all 0.3s;
+  width: 20%;
+  height: 35px;
+  border-left: 2px solid #caa98f;
+}
+#navbar button:hover, #navbar button:focus {
+  border-left: 4px solid #caa98f;
+}
+#navbar button:nth-child(even) {
+  border-radius: 5px;
+  background-color: #caa98f;
+  color: white;
+}
+#navbar button:nth-child(even):hover, #navbar button:nth-child(even):focus {
+  border-left: 4px solid #fafafa;
 }

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { selectGameState, setGameState } from "../../AppSlice";
 import { startingFen } from "../../resources";
@@ -7,6 +8,11 @@ import "./GameRecord.css";
 const GameRecord: React.FC = () => {
   const dispatch = useDispatch();
   const gameState = useSelector(selectGameState);
+  useEffect(() => {
+    document
+      .querySelector(".record-cell:last-child")
+      ?.scrollIntoView({ behavior: "smooth", block: "end" });
+  });
   return (
     <div id="game-record">
       {gameState.history.map((record, i) => {

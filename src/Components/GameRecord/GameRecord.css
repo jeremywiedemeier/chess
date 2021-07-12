@@ -2,10 +2,10 @@
   display: flex;
   width: 100%;
   max-width: 410px;
-  min-width: 200px;
+  min-width: 153px;
   margin: 10px auto;
   flex-wrap: wrap;
-  max-height: calc(100% - 20px);
+  max-height: calc(100% - 40px);
   overflow-y: scroll;
 }
 #game-record::-webkit-scrollbar {
@@ -13,8 +13,8 @@
 }
 #game-record::-webkit-scrollbar-thumb {
   border-left: 2px solid #fafafa;
-  background-color: #caa98f;
-  border-radius: 5px;
+  background-color: #d8b79d;
+  border-radius: 3px;
 }
 
 .record-cell {
@@ -23,12 +23,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #caa98f;
-  font-size: large;
-  border: 2px solid transparent;
-  background-color: transparent;
-  cursor: pointer;
+  color: #b68d6e;
   transition: all 0.2s;
+  border-left: 2px solid #caa98f;
 }
 .record-cell:hover, .record-cell:focus {
   border-left: 4px solid #caa98f
@@ -39,7 +36,7 @@
   color: white;
 }
 .record-cell:nth-child(even):hover, .record-cell:nth-child(even):focus {
-  border-left: 4px solid #a87952;
+  border-left: 4px solid #fafafa;
 }
 
 .record-cell:nth-child(2) {
