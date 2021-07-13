@@ -18,7 +18,7 @@ our_time, opp_time = 1000, 1000  # centi-seconds
 
 
 @app.route('/api/comp-move')
-def predict_name():
+def comp_move():
     if request.args.get("fen"):
 
         # Set position and move

@@ -2,8 +2,10 @@
   height: 80px;
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
+  /* background-color: #fdf7f1; */
+  /* border-bottom: 1px solid #dbc3b1; */
 }
 
 #navbar button {
@@ -14,7 +16,8 @@
   border-left: 2px solid #caa98f;
 }
 #navbar button:nth-child(odd):hover, #navbar button:nth-child(odd):focus {
-  border-left: 4px solid #caa98f;
+  border-left: 2px solid #b68d6e;
+  color: #8b6141;
 }
 #navbar button:nth-child(even) {
   border-radius: 5px;

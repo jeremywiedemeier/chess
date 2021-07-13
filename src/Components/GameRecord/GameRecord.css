@@ -28,7 +28,8 @@
   border-left: 2px solid #caa98f;
 }
 .record-cell:hover, .record-cell:focus {
-  border-left: 4px solid #caa98f
+  border-left: 2px solid #b68d6e;
+  color: #8b6141;
 }
 
 .record-cell:nth-child(even) {

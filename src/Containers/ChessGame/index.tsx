@@ -16,7 +16,11 @@ const ChessGame: React.FC = () => {
     gameFen: string,
     lastMove: { fen: string; move: string } | null
   ) => {
-    fetch(`http://localhost:5000/api/comp-move?fen=${gameFen}`)
+    fetch(
+      `http://localhost:5000/api/comp-move?${new URLSearchParams({
+        fen: gameState.game.fen(),
+      })}`
+    )
       .then((response) => response.json())
       .then((compMove) => {
         const move = gameState.game.move({
