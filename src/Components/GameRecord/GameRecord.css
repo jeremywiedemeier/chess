@@ -7,15 +7,6 @@
   flex-wrap: wrap;
   overflow-y: scroll;
 }
-#game-record::-webkit-scrollbar {
-  width: 10px
-}
-#game-record::-webkit-scrollbar-thumb {
-  border-left: 2px solid #fafafa;
-  background-color: #d8b79d;
-  border-radius: 3px;
-}
-
 .record-cell {
   width: 50%;
   height: 40px;
@@ -36,7 +27,7 @@
   color: white;
 }
 .record-cell:nth-child(even):hover, .record-cell:nth-child(even):focus {
-  background-color: #b68d6e;
+  background-color: #c4a187;
   border-color: transparent;
 }
 

@@ -11,12 +11,12 @@ const GameRecord: React.FC<Props> = ({ gameState, shorten }: Props) => {
   useEffect(() => {
     document
       .querySelector(".record-cell:last-child")
-      ?.scrollIntoView({ behavior: "smooth", block: "end" });
+      ?.scrollIntoView({ block: "end" });
   });
   return (
     <div
       id="game-record"
-      style={{ maxHeight: shorten ? "35.9%" : "calc(100% - 20px)" }}
+      style={{ maxHeight: shorten ? "35.9%" : "calc(100% - 300px)" }}
     >
       {gameState.history.map((record, i) => {
         return (

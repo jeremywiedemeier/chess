@@ -2,7 +2,6 @@ import React from "react";
 import Chessboard from "chessboardjsx";
 import "./ChessGame.css";
 import { useDispatch, useSelector } from "react-redux";
-import { ChessInstance } from "chess.js";
 import { selectGameState, setGameState } from "../../AppSlice";
 import { startingFen } from "../../resources";
 
@@ -38,6 +37,7 @@ const ChessGame: React.FC = () => {
                   move: currentGameState.game.history().slice(-1)[0],
                 },
               ],
+              engineLogs: [...currentGameState.engineLogs, ...compMove.log],
             })
           );
         }

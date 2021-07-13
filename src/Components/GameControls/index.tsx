@@ -27,6 +27,7 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
                   ...gameState,
                   game: resetGame,
                   history: [],
+                  engineLogs: [],
                   playerColor:
                     playerColor === "random"
                       ? (() => (Math.random() > 0.5 ? "white" : "black"))()

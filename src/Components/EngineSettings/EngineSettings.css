@@ -4,3 +4,29 @@
   border: 1px solid #d6beab;
   border-radius: 7px;
 }
+#engine-settings img {
+  filter: brightness(0) saturate(100%) invert(78%) sepia(16%) saturate(553%) hue-rotate(344deg) brightness(87%) contrast(91%);
+}
+
+#engine-settings h3 {
+  text-align: center;
+  margin: 15px 0;
+  color: #ad8566;
+}
+
+.piece-value-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.piece-value-wrapper input {
+  width: 40px;
+  height: 20px;
+  border: 1px solid #d6beab;
+  border-radius: 3px;
+  text-align: center;
+  font-family: monospace;
+  color: #ad8566;
+}
+.piece-value-wrapper input:focus {
+  border: 1px solid #ad8566;
+}

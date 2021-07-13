@@ -21,9 +21,12 @@ our_time, opp_time = 1000, 1000  # centi-seconds
 def comp_move():
     if request.args.get("fen"):
 
-        # Set position and move
         fen = request.args.get("fen")
-        pos = tools.parseFEN(fen)
+        try:
+            pos = tools.parseFEN(fen)
+        except ValueError:
+            return "Bad FEN string :S"
+
         color = WHITE if fen.split()[1] == 'w' else BLACK
 
         moves_remain = 40
@@ -31,9 +34,18 @@ def comp_move():
         ponder = None
 
         moves = ""
+        log = []
 
         for sdepth, _move, _score in searcher.search(pos):
             moves = tools.pv(searcher, pos, include_scores=False)
+
+            entry = searcher.tp_score.get((pos, sdepth, True))
+            score = int(round((entry.lower + entry.upper) / 2))
+            usedtime = int((time.time() - start) * 1000)
+            moves_str = moves if len(moves) < 15 else ''
+            log.append('depth {} score {} cp time {} nodes {} pv {}'.format(sdepth, score, usedtime,
+                                                                            searcher.nodes, moves_str))
+
             if len(moves) > 5:
                 ponder = moves[1]
 
@@ -57,10 +69,10 @@ def comp_move():
             #     return f'bestmove {moves[0]} ponder {moves[1]}'
             # else:
             #     return 'bestmove ' + moves[0]
-            return {"compMove": moves[0]}
+            return {"compMove": moves[0], "log": log}
 
     else:
-        return "Error :("
+        return "No FEN string :("
 
 # board = chess.Board()
 #

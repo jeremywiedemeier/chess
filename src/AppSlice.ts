@@ -23,6 +23,7 @@ const initialState: AppState = {
     playerColor: Math.random() > 0.5 ? "white" : "black",
     playerTurn: true,
     history: [],
+    engineLogs: [],
   },
 };
 

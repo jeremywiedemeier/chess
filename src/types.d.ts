@@ -5,4 +5,5 @@ export type GameState = {
   playerColor: "white" | "black";
   playerTurn: boolean;
   history: { fen: string; move: string }[];
+  engineLogs: string[];
 };

@@ -1,0 +1,26 @@
+.blinking {
+  animation: blinker 1s step-start infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+#engine-logs {
+  height: 200px;
+  width: calc(100% - 60px);
+  border: 1px solid #b68d6e;
+  margin: 20px;
+  background-color: #fffcf9;
+  color: #ad8566;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+#engine-logs p {
+  font-size: 13px;
+  font-family: monospace;
+  margin: 0 0 5px 0;
+}
