@@ -6,7 +6,7 @@ import { startingFen } from "../../resources";
 import { GameState } from "../../types";
 import "./GameRecord.css";
 
-const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
+const GameRecord: React.FC<Props> = ({ gameState, shorten }: Props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     document
@@ -14,7 +14,10 @@ const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
       ?.scrollIntoView({ behavior: "smooth", block: "end" });
   });
   return (
-    <div id="game-record">
+    <div
+      id="game-record"
+      style={{ maxHeight: shorten ? "35.9%" : "calc(100% - 20px)" }}
+    >
       {gameState.history.map((record, i) => {
         return (
           <button
@@ -56,6 +59,7 @@ const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
 
 interface Props {
   gameState: GameState;
+  shorten: boolean;
 }
 
 export default GameRecord;

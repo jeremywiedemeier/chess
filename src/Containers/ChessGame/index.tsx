@@ -2,6 +2,7 @@ import React from "react";
 import Chessboard from "chessboardjsx";
 import "./ChessGame.css";
 import { useDispatch, useSelector } from "react-redux";
+import { ChessInstance } from "chess.js";
 import { selectGameState, setGameState } from "../../AppSlice";
 import { startingFen } from "../../resources";
 
@@ -12,18 +13,15 @@ const ChessGame: React.FC = () => {
   const gameState = useSelector(selectGameState);
   const fen = gameState.game.fen();
 
-  const getCompMove = (
-    gameFen: string,
-    lastMove: { fen: string; move: string } | null
-  ) => {
+  const getCompMove = (currentGameState: typeof gameState) => {
     fetch(
       `http://localhost:5000/api/comp-move?${new URLSearchParams({
-        fen: gameState.game.fen(),
+        fen: currentGameState.game.fen(),
       })}`
     )
       .then((response) => response.json())
       .then((compMove) => {
-        const move = gameState.game.move({
+        const move = currentGameState.game.move({
           from: compMove.compMove.substr(0, 2),
           to: compMove.compMove.substr(2, 2),
           promotion: "q",
@@ -31,24 +29,15 @@ const ChessGame: React.FC = () => {
         if (move !== null) {
           dispatch(
             setGameState({
-              ...gameState,
+              ...currentGameState,
               playerTurn: true,
-              history: lastMove
-                ? [
-                    ...gameState.history,
-                    lastMove,
-                    {
-                      fen: gameState.game.fen(),
-                      move: gameState.game.history().slice(-1)[0],
-                    },
-                  ]
-                : [
-                    ...gameState.history,
-                    {
-                      fen: gameState.game.fen(),
-                      move: gameState.game.history().slice(-1)[0],
-                    },
-                  ],
+              history: [
+                ...currentGameState.history,
+                {
+                  fen: currentGameState.game.fen(),
+                  move: currentGameState.game.history().slice(-1)[0],
+                },
+              ],
             })
           );
         }
@@ -56,7 +45,7 @@ const ChessGame: React.FC = () => {
   };
 
   if (fen === startingFen && gameState.playerColor === "black") {
-    getCompMove(fen, null);
+    getCompMove(gameState);
   }
 
   return (
@@ -72,23 +61,19 @@ const ChessGame: React.FC = () => {
               promotion: "q",
             });
             if (move !== null) {
-              dispatch(
-                setGameState({
-                  ...gameState,
-                  playerTurn: false,
-                  history: [
-                    ...gameState.history,
-                    {
-                      fen: gameState.game.fen(),
-                      move: gameState.game.history().slice(-1)[0],
-                    },
-                  ],
-                })
-              );
-              getCompMove(gameState.game.fen(), {
-                fen: gameState.game.fen(),
-                move: gameState.game.history().slice(-1)[0],
-              });
+              const currentGameState = {
+                ...gameState,
+                playerTurn: false,
+                history: [
+                  ...gameState.history,
+                  {
+                    fen: gameState.game.fen(),
+                    move: gameState.game.history().slice(-1)[0],
+                  },
+                ],
+              };
+              dispatch(setGameState(currentGameState));
+              getCompMove(currentGameState);
             }
           }
         }}

@@ -5,7 +5,7 @@
   justify-content: space-evenly;
   border-radius: 7px;
   height: 20%;
-  margin: 10px 20px 0 20px;
+  margin: 10px 4% 0 4%;
   border: 1px solid #d6beab;
 }
 #game-controls img {
@@ -20,10 +20,12 @@
   width: 100%;
 }
 #control-wrapper img {
-  margin: 0 15px 0 0;
+  margin: 0 10% 0 0;
 }
 #control-wrapper > div {
   display: flex;
+  position: relative;
+  flex-basis: 30%;
 }
 #control-wrapper > div:nth-of-type(1):hover .reset {
   transform: rotate(90deg);
@@ -35,7 +37,7 @@
 #control-wrapper button {
   height: 40px;
   border-radius: 5px;
-  padding: 0 20px;
+  padding: 0 20%;
   transition: all 0.2s;
 }
 #control-wrapper div:nth-of-type(odd) button {

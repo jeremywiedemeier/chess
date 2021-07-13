@@ -14,7 +14,9 @@ const Menu: React.FC<Props> = ({ content }: Props) => {
       {content.navbar ? <NavBar /> : null}
       {content.gameControls ? <GameControls gameState={gameState} /> : null}
       {content.engine ? <EngineSettings /> : null}
-      {content.records ? <GameRecord gameState={gameState} /> : null}
+      {content.records ? (
+        <GameRecord gameState={gameState} shorten={content.navbar} />
+      ) : null}
     </div>
   );
 };

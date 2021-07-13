@@ -1,5 +1,6 @@
 import { ChessInstance } from "chess.js";
 import React, { useState } from "react";
+
 import { useDispatch } from "react-redux";
 import { setGameState } from "../../AppSlice";
 import { GameState } from "../../types";
@@ -7,13 +8,14 @@ import "./GameControls.css";
 
 const GameControls: React.FC<Props> = ({ gameState }: Props) => {
   const dispatch = useDispatch();
+  const [compSuggestion, setCompSuggestion] = useState("Suggest");
   const [playerColor, setPlayerColor] = useState<"white" | "black" | "random">(
     "random"
   );
   return (
     <div id="game-controls">
       <div id="control-wrapper">
-        <div>
+        <div style={{ right: "25px" }}>
           <img className="reset" alt="reset game" src="reset.png" />
           <button
             type="button"
@@ -36,11 +38,13 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
             Reset
           </button>
         </div>
-        <div>
+        <div style={{ right: "5px" }}>
           <img className="suggest" alt="suggest move" src="monitor.png" />
           <button
             type="button"
+            id="comp-suggestion"
             onClick={() => {
+              setCompSuggestion("...");
               fetch(
                 `http://localhost:5000/api/comp-move?${new URLSearchParams({
                   fen: gameState.game.fen(),
@@ -48,30 +52,11 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
               )
                 .then((response) => response.json())
                 .then((compMove) => {
-                  const move = gameState.game.move({
-                    from: compMove.compMove.substr(0, 2),
-                    to: compMove.compMove.substr(2, 2),
-                    promotion: "q",
-                  });
-                  if (move !== null) {
-                    dispatch(
-                      setGameState({
-                        ...gameState,
-                        playerTurn: true,
-                        history: [
-                          ...gameState.history,
-                          {
-                            fen: gameState.game.fen(),
-                            move: gameState.game.history().slice(-1)[0],
-                          },
-                        ],
-                      })
-                    );
-                  }
+                  setCompSuggestion(compMove.compMove);
                 });
             }}
           >
-            Suggest
+            {compSuggestion}
           </button>
         </div>
       </div>
