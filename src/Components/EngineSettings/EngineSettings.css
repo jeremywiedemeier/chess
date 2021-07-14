@@ -6,6 +6,10 @@
 }
 #engine-settings img {
   filter: brightness(0) saturate(100%) invert(78%) sepia(16%) saturate(553%) hue-rotate(344deg) brightness(87%) contrast(91%);
+  transition: all 0.2s;
+}
+#engine-settings img:hover {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
 }
 
 #engine-settings h3 {

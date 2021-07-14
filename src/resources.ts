@@ -24,6 +24,16 @@ export const getResourceUrl = (resource: string): string =>
 
 export const startingFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+export const defaultPieceValues = {
+  pawn: 100,
+  knight: 280,
+  bishop: 320,
+  rook: 479,
+  queen: 929,
+  king: 60000,
+};
+
 export const startingObj: Position = {
   a1: "wR",
   a2: "wP",

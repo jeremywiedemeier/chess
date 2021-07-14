@@ -1,28 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setPieceValues } from "../../AppSlice";
+import { defaultPieceValues } from "../../resources";
+import { Piece } from "../../types";
 import "./EngineSettings.css";
 
-const EngineSettings: React.FC = () => {
+const chessPieces = Object.keys(defaultPieceValues) as Piece[];
+
+const EngineSettings: React.FC<Props> = ({ pieceValues }: Props) => {
+  const dispatch = useDispatch();
+  const [unvalidatedPieceValues, setUnvalidatedPieceValues] = useState<{
+    [key: string]: string | number;
+  }>(pieceValues);
+
+  const generatePieceValueInput = (piece: Piece) => (
+    <input
+      type="text"
+      key={piece}
+      value={unvalidatedPieceValues[piece]}
+      onKeyPress={(env) => {
+        if (env.key === "Enter") (env.target as HTMLInputElement).blur();
+      }}
+      onChange={(inp) => {
+        setUnvalidatedPieceValues({
+          ...unvalidatedPieceValues,
+          [piece]: inp.target.value,
+        });
+      }}
+      onBlur={() => {
+        const validatedPieceValues = {
+          ...unvalidatedPieceValues,
+          [piece]:
+            Math.max(
+              Math.min(
+                typeof unvalidatedPieceValues[piece] === "string"
+                  ? parseInt(unvalidatedPieceValues[piece] as string, 10)
+                  : (unvalidatedPieceValues[piece] as number),
+                99999
+              ),
+              1
+            ) || defaultPieceValues[piece],
+        };
+        setUnvalidatedPieceValues(validatedPieceValues);
+        dispatch(setPieceValues(validatedPieceValues));
+      }}
+    />
+  );
+
   return (
     <div id="engine-settings">
-      <h3>Centipawn values</h3>
+      <h3>Engine Piece Values</h3>
       <div className="piece-value-wrapper">
-        <img alt="pawn value" src="chess_pieces/pawn.svg" />
-        <img alt="knight value" src="chess_pieces/knight.svg" />
-        <img alt="bishop value" src="chess_pieces/bishop.svg" />
-        <img alt="rook value" src="chess_pieces/rook.svg" />
-        <img alt="queen value" src="chess_pieces/queen.svg" />
-        <img alt="king value" src="chess_pieces/king.svg" />
+        {chessPieces.map((piece) => (
+          <img
+            key={piece}
+            alt={`${piece} value`}
+            src={`chess_pieces/${piece}.svg`}
+          />
+        ))}
       </div>
       <div className="piece-value-wrapper">
-        <input type="text" value="100" />
-        <input type="text" value="280" />
-        <input type="text" value="320" />
-        <input type="text" value="479" />
-        <input type="text" value="929" />
-        <input type="text" value="60000" />
+        {chessPieces.map((piece) => generatePieceValueInput(piece))}
       </div>
     </div>
   );
 };
+
+interface Props {
+  pieceValues: { [key: string]: number | string };
+}
 
 export default EngineSettings;

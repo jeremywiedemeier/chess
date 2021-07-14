@@ -12,7 +12,7 @@
   height: 35px;
   width: 35px;
   transition: all 0.2s;
-  filter: invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
+  filter: invert(78%) sepia(16%) saturate(553%) hue-rotate(344deg) brightness(87%) contrast(91%);
 }
 #control-wrapper {
   display: flex;
@@ -29,10 +29,10 @@
 }
 #control-wrapper > div:nth-of-type(1):hover .reset {
   transform: rotate(90deg);
-  filter: invert(42%) sepia(52%) saturate(437%) hue-rotate(344deg) brightness(95%) contrast(88%);
+  filter: invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
 }
 #control-wrapper > div:nth-of-type(2):hover .suggest {
-  filter: invert(42%) sepia(52%) saturate(437%) hue-rotate(344deg) brightness(95%) contrast(88%);
+  filter: invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
 }
 #control-wrapper button {
   height: 40px;
@@ -62,7 +62,7 @@
   width: 100%;
 }
 #sides-wrapper:hover img {
-  filter: invert(42%) sepia(52%) saturate(437%) hue-rotate(344deg) brightness(95%) contrast(88%);
+  filter: invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
 }
 .sides-label {
   border-radius: 5px;

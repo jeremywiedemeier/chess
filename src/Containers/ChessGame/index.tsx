@@ -3,48 +3,63 @@ import Chessboard from "chessboardjsx";
 import "./ChessGame.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGameState, setGameState } from "../../AppSlice";
-import { startingFen } from "../../resources";
+import { getResourceUrl, startingFen } from "../../resources";
 
 const maxBoardWidth = 800;
 
 const ChessGame: React.FC = () => {
   const dispatch = useDispatch();
   const gameState = useSelector(selectGameState);
-  const fen = gameState.game.fen();
 
   const getCompMove = (currentGameState: typeof gameState) => {
     fetch(
-      `http://localhost:5000/api/comp-move?${new URLSearchParams({
+      `${getResourceUrl("/api/comp-move")}?${new URLSearchParams({
         fen: currentGameState.game.fen(),
+        pieceValues: JSON.stringify(currentGameState.pieceValues),
       })}`
     )
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
       .then((compMove) => {
-        const move = currentGameState.game.move({
-          from: compMove.compMove.substr(0, 2),
-          to: compMove.compMove.substr(2, 2),
-          promotion: "q",
-        });
-        if (move !== null) {
-          dispatch(
-            setGameState({
-              ...currentGameState,
-              playerTurn: true,
-              history: [
-                ...currentGameState.history,
-                {
-                  fen: currentGameState.game.fen(),
-                  move: currentGameState.game.history().slice(-1)[0],
-                },
-              ],
-              engineLogs: [...currentGameState.engineLogs, ...compMove.log],
-            })
-          );
+        const newEngineLogs = [...currentGameState.engineLogs, ...compMove.log];
+        const newHistory = [...currentGameState.history];
+
+        if (compMove.compMove === "resign") {
+          newEngineLogs.push("Good game!");
+        } else {
+          const move = currentGameState.game.move({
+            from: compMove.compMove.substr(0, 2),
+            to: compMove.compMove.substr(2, 2),
+            promotion: "q",
+          });
+          if (move !== null) {
+            newHistory.push({
+              fen: currentGameState.game.fen(),
+              move: currentGameState.game.history().slice(-1)[0],
+            });
+            if (currentGameState.game.in_checkmate()) {
+              newEngineLogs.push("Checkmate!");
+            } else if (currentGameState.game.in_check()) {
+              newEngineLogs.push("Check!");
+            }
+            dispatch(
+              setGameState({
+                ...currentGameState,
+                history: newHistory,
+                engineLogs: newEngineLogs,
+                playerTurn: true,
+              })
+            );
+          }
         }
       });
   };
 
-  if (fen === startingFen && gameState.playerColor === "black") {
+  if (
+    gameState.game.fen() === startingFen &&
+    gameState.playerColor === "black"
+  ) {
     getCompMove(gameState);
   }
 
@@ -52,7 +67,7 @@ const ChessGame: React.FC = () => {
     <div id="chess-board">
       <Chessboard
         orientation={gameState.playerColor}
-        position={fen}
+        position={gameState.game.fen()}
         onDrop={({ sourceSquare, targetSquare }) => {
           if (gameState.playerTurn) {
             const move = gameState.game.move({

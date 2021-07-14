@@ -11,7 +11,7 @@ const EngineLogs: React.FC<Props> = ({ engineLogs }: Props) => {
   return (
     <div id="engine-logs">
       {engineLogs.map((log) => (
-        <p key={log}>&gt; {log}</p>
+        <p key={engineLogs.indexOf(log) + log}>&gt; {log}</p>
       ))}
       <p>
         &gt; <span className="blinking">_</span>

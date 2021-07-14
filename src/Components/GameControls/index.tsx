@@ -1,8 +1,8 @@
-import { ChessInstance } from "chess.js";
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { setGameState } from "../../AppSlice";
+import { resetGame } from "../../AppSlice";
+import { getResourceUrl } from "../../resources";
 import { GameState } from "../../types";
 import "./GameControls.css";
 
@@ -20,20 +20,11 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
           <button
             type="button"
             onClick={() => {
-              const resetGame: ChessInstance = gameState.game;
-              resetGame.reset();
-              dispatch(
-                setGameState({
-                  ...gameState,
-                  game: resetGame,
-                  history: [],
-                  engineLogs: [],
-                  playerColor:
-                    playerColor === "random"
-                      ? (() => (Math.random() > 0.5 ? "white" : "black"))()
-                      : playerColor,
-                })
-              );
+              const newGamePlayerColor =
+                playerColor === "random"
+                  ? (() => (Math.random() > 0.5 ? "white" : "black"))()
+                  : playerColor;
+              dispatch(resetGame(newGamePlayerColor));
             }}
           >
             Reset
@@ -47,13 +38,18 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
             onClick={() => {
               setCompSuggestion("...");
               fetch(
-                `http://localhost:5000/api/comp-move?${new URLSearchParams({
+                `${getResourceUrl("/api/comp-move")}?${new URLSearchParams({
                   fen: gameState.game.fen(),
+                  pieceValues: JSON.stringify(gameState.pieceValues),
                 })}`
               )
                 .then((response) => response.json())
                 .then((compMove) => {
-                  setCompSuggestion(compMove.compMove);
+                  setCompSuggestion(
+                    compMove.compMove !== "resign"
+                      ? compMove.compMove
+                      : "..reset?"
+                  );
                 });
             }}
           >

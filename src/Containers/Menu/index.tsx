@@ -4,6 +4,7 @@ import { selectGameState } from "../../AppSlice";
 import NavBar from "../../Components/NavBar";
 import GameRecord from "../../Components/GameRecord";
 import GameControls from "../../Components/GameControls";
+import Classifier from "../../Components/Classifier";
 import EngineSettings from "../../Components/EngineSettings";
 import EngineLogs from "../../Components/EngineLogs";
 import "./Menu.css";
@@ -14,7 +15,10 @@ const Menu: React.FC<Props> = ({ content }: Props) => {
     <div id="menu">
       {content.navbar ? <NavBar /> : null}
       {content.gameControls ? <GameControls gameState={gameState} /> : null}
-      {content.engine ? <EngineSettings /> : null}
+      {content.engine ? (
+        <EngineSettings pieceValues={gameState.pieceValues} />
+      ) : null}
+      {content.classifier ? <Classifier /> : null}
       {content.engineLogs ? (
         <EngineLogs engineLogs={gameState.engineLogs} />
       ) : null}
@@ -29,6 +33,7 @@ interface Props {
     navbar: boolean;
     gameControls: boolean;
     engine: boolean;
+    classifier: boolean;
     engineLogs: boolean;
     records: boolean;
   };
