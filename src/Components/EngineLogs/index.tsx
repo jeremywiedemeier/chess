@@ -10,8 +10,9 @@ const EngineLogs: React.FC<Props> = ({ engineLogs }: Props) => {
 
   return (
     <div id="engine-logs">
-      {engineLogs.map((log) => (
-        <p key={engineLogs.indexOf(log) + log}>&gt; {log}</p>
+      {engineLogs.map((log, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <p key={i + log}>&gt; {log}</p>
       ))}
       <p>
         &gt; <span className="blinking">_</span>

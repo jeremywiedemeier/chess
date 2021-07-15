@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /server/__pycache__
+/server/data
+/server/lc0
