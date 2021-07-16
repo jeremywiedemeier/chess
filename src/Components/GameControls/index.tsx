@@ -38,7 +38,9 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
             onClick={() => {
               setCompSuggestion("...");
               fetch(
-                `${getResourceUrl("/api/comp-move")}?${new URLSearchParams({
+                `${getResourceUrl(
+                  `/api/${gameState.engine}-move`
+                )}?${new URLSearchParams({
                   fen: gameState.game.fen(),
                   pieceValues: JSON.stringify(gameState.pieceValues),
                 })}`

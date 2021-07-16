@@ -13,11 +13,9 @@ const Menu: React.FC<Props> = ({ content }: Props) => {
   const gameState = useSelector(selectGameState);
   return (
     <div id="menu">
-      {content.navbar ? <NavBar /> : null}
+      {content.navbar ? <NavBar gameState={gameState} /> : null}
       {content.gameControls ? <GameControls gameState={gameState} /> : null}
-      {content.engine ? (
-        <EngineSettings pieceValues={gameState.pieceValues} />
-      ) : null}
+      {content.engine ? <EngineSettings gameState={gameState} /> : null}
       {content.classifier ? <Classifier /> : null}
       {content.engineLogs ? (
         <EngineLogs engineLogs={gameState.engineLogs} />

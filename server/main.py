@@ -3,6 +3,7 @@ import copy
 import json
 import time
 
+import chess.engine
 from flask import Flask, request
 from flask_cors import CORS
 
@@ -17,8 +18,22 @@ depth = 1000
 movetime = -1
 our_time, opp_time = 1000, 1000  # centi-seconds
 
+engine = chess.engine.SimpleEngine.popen_uci("lc0/lc0")
 
-@app.route('/api/comp-move')
+
+@app.route('/api/maia-move')
+def maia_move():
+    if request.args.get("fen"):
+        board = chess.Board(request.args.get("fen"))
+        play = engine.play(board, chess.engine.Limit(nodes=1), info=chess.engine.INFO_ALL)
+        log = 'maia1500: depth {} score cp {} time {} nodes {}'.format(play.info["depth"], play.info["score"].relative,
+                                                                       play.info["time"],
+                                                                       play.info["nodes"])
+        return {"compMove": play.move.uci(), "log": [log]}, 200
+    return "No FEN :(", 400
+
+
+@app.route('/api/sunfish-move')
 def comp_move():
     piece_values = copy.deepcopy(default_piece)
     pst = copy.deepcopy(default_pst)
@@ -70,10 +85,7 @@ def comp_move():
             usedtime = int((time.time() - start) * 1000)
             moves_str = moves if len(moves) < 15 else ''
             log.append('sunfish: depth {} score cp {} time {} nodes {} pv {}'.format(sdepth, score, usedtime,
-                                                                                 searcher.nodes, moves_str))
-
-            if len(moves) > 5:
-                ponder = moves[1]
+                                                                                     searcher.nodes, moves_str))
 
             if 0 < movetime < (time.time() - start) * 1000:
                 break
@@ -86,25 +98,11 @@ def comp_move():
 
         entry = searcher.tp_score.get((pos, sdepth, True))
         m, s = searcher.tp_move.get(pos), entry.lower
-        # We only resign once we are mated.. That's never?
         if s == -MATE_UPPER:
             return {"compMove": "resign", "log": log}, 200
         else:
             moves = moves.split(' ')
-            # if len(moves) > 1:
-            #     return f'bestmove {moves[0]} ponder {moves[1]}'
-            # else:
-            #     return 'bestmove ' + moves[0]
             return {"compMove": moves[0], "log": log}, 200
 
     else:
         return "400: No FEN string :(", 400
-
-# board = chess.Board()
-#
-# print(type(board.legal_moves))
-#
-# while not board.is_game_over():
-#     print("\n   -----------------   \n")
-#     print(board)
-#     board.push(random.choice([move for move in board.legal_moves]))

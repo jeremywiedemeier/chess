@@ -13,10 +13,12 @@ const ChessGame: React.FC = () => {
 
   const getCompMove = (currentGameState: typeof gameState) => {
     fetch(
-      `${getResourceUrl("/api/comp-move")}?${new URLSearchParams({
-        fen: currentGameState.game.fen(),
-        pieceValues: JSON.stringify(currentGameState.pieceValues),
-      })}`
+      `${getResourceUrl(`/api/${gameState.engine}-move`)}?${new URLSearchParams(
+        {
+          fen: currentGameState.game.fen(),
+          pieceValues: JSON.stringify(currentGameState.pieceValues),
+        }
+      )}`
     )
       .then((response) => {
         return response.json();

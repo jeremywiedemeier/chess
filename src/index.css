@@ -7,9 +7,9 @@
   width: 10px
 }
 ::-webkit-scrollbar-thumb {
-  border-left: 2px solid #fafafa;
+  border-left: 3px solid #fafafa;
   background-color: #d8b79d;
-  border-radius: 3px;
+  border-radius: 5px 3px 3px 5px;
 }
 
 body, html, #root {

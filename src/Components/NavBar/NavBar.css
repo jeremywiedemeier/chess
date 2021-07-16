@@ -5,8 +5,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #fdf7f1; */
-  /* border-bottom: 1px solid #dbc3b1; */
 }
 
 #navbar button {
@@ -16,16 +14,25 @@
   height: 40px;
   border-left: 2px solid #caa98f;
 }
-#navbar button:nth-child(odd):hover, #navbar button:nth-child(odd):focus {
+#navbar > a {
+  width: 20%;
+}
+#navbar > a > button {
+  width: 100%;
+  position: relative;
+  top: 3px;
+}
+
+#navbar button:hover, #navbar button:focus {
   border-left: 2px solid #b68d6e;
   color: #8b6141;
 }
-#navbar button:nth-child(even) {
+#navbar button.dark {
   border-radius: 5px;
   background-color: #caa98f;
   color: white;
 }
-#navbar button:nth-child(even):hover, #navbar button:nth-child(even):focus {
+#navbar button.dark:hover, #navbar button.dark:focus {
   background-color: #b68d6e;
   border-color: transparent;
 }

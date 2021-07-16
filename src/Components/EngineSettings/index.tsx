@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPieceValues } from "../../AppSlice";
 import { defaultPieceValues } from "../../resources";
-import { Piece } from "../../types";
+import { GameState, Piece } from "../../types";
 import "./EngineSettings.css";
 
 const chessPieces = Object.keys(defaultPieceValues) as Piece[];
 
-const EngineSettings: React.FC<Props> = ({ pieceValues }: Props) => {
+const EngineSettings: React.FC<Props> = ({ gameState }: Props) => {
   const dispatch = useDispatch();
   const [unvalidatedPieceValues, setUnvalidatedPieceValues] = useState<{
     [key: string]: string | number;
-  }>(pieceValues);
+  }>(gameState.pieceValues);
 
   const generatePieceValueInput = (piece: Piece) => (
     <input
@@ -48,8 +48,11 @@ const EngineSettings: React.FC<Props> = ({ pieceValues }: Props) => {
   );
 
   return (
-    <div id="engine-settings">
-      <h3>Engine Piece Values</h3>
+    <div
+      id="engine-settings"
+      className={gameState.engine === "sunfish" ? "" : "hidden"}
+    >
+      <h3 className="module-title">Sunfish Piece Values</h3>
       <div className="piece-value-wrapper">
         {chessPieces.map((piece) => (
           <img
@@ -67,7 +70,7 @@ const EngineSettings: React.FC<Props> = ({ pieceValues }: Props) => {
 };
 
 interface Props {
-  pieceValues: { [key: string]: number | string };
+  gameState: GameState;
 }
 
 export default EngineSettings;

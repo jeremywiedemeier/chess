@@ -1,29 +1,49 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setGameState } from "../../AppSlice";
+import { GameState } from "../../types";
 import "./NavBar.css";
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<Props> = ({ gameState }: Props) => {
+  const dispatch = useDispatch();
   return (
     <div id="navbar">
-      <button type="button">Home</button>
-      <button type="button">About</button>
+      <a href="https://jeremywiedemeier.com/">
+        <button type="button">Home</button>
+      </a>
+      <a
+        href="https://github.com/jeremywiedemeier/chess"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button type="button" className="dark">
+          Code
+        </button>
+      </a>
       <button
         type="button"
+        className={gameState.engine === "sunfish" ? "dark" : ""}
         onClick={() => {
-          window.open("https://github.com/jeremywiedemeier/chess");
+          dispatch(setGameState({ ...gameState, engine: "sunfish" }));
         }}
       >
-        Code
+        Sunfish
       </button>
       <button
         type="button"
+        className={gameState.engine === "maia" ? "dark" : ""}
         onClick={() => {
-          window.open("https://github.com/thomasahle/sunfish");
+          dispatch(setGameState({ ...gameState, engine: "maia" }));
         }}
       >
-        Engine
+        Maia
       </button>
     </div>
   );
 };
+
+interface Props {
+  gameState: GameState;
+}
 
 export default NavBar;

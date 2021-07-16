@@ -4,3 +4,50 @@
   border: 1px solid #d6beab;
   border-radius: 7px;
 }
+
+#classifier img {
+  height: 40px;
+  width: 40px;
+  transition: all 0.2s;
+  filter: invert(63%) sepia(35%) saturate(307%) hue-rotate(343deg) brightness(99%) contrast(86%);
+}
+#classifier img.robot {
+  height: 32px;
+  width: 32px;
+}
+#classifier-scale-wrapper:hover img {
+  filter: invert(68%) sepia(45%) saturate(301%) hue-rotate(343deg) brightness(78%) contrast(89%);
+}
+
+#classifier-scale-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0 30px 0;
+}
+
+#classifier-scale {
+  width: calc(100% - 100px);
+  border: 1px solid #d6beab;
+  border-radius: 10px;
+}
+#scale-data {
+  height: 100%;
+  width: 50%;
+  background-color: #caa98f;
+  border-radius: 8px;
+  transition: all 0.5s;
+  transform-origin: left;
+}
+
+#analyze-button {
+  border-radius: 5px;
+  background-color: #caa98f;
+  color: white;
+  transition: all 0.2s;
+  padding: 20px 60px;
+  margin: 10px auto;
+  font-size: 1.5em;
+}
+#analyze-button:hover {
+  background-color: #b68d6e;
+}
