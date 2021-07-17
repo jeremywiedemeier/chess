@@ -10,12 +10,12 @@
 #navbar button {
   color: #b68d6e;
   transition: all 0.3s;
-  width: 20%;
+  width: 30%;
   height: 40px;
   border-left: 2px solid #caa98f;
 }
 #navbar > a {
-  width: 20%;
+  width: 30%;
 }
 #navbar > a > button {
   width: 100%;

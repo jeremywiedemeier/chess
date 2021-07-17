@@ -48,11 +48,8 @@ const EngineSettings: React.FC<Props> = ({ gameState }: Props) => {
   );
 
   return (
-    <div
-      id="engine-settings"
-      className={gameState.engine === "sunfish" ? "" : "hidden"}
-    >
-      <h3 className="module-title">Sunfish Piece Values</h3>
+    <div id="engine-settings">
+      <h3 className="module-title">Piece Values</h3>
       <div className="piece-value-wrapper">
         {chessPieces.map((piece) => (
           <img

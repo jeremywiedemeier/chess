@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 chess = "*"
 flask = "*"
+gunicorn = "*"
+flask-cors = "*"
 
 [dev-packages]
+waitress = "*"
 
 [requires]
 python_version = "3.8"

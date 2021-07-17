@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Chessboard from "chessboardjsx";
 import "./ChessGame.css";
@@ -13,12 +14,10 @@ const ChessGame: React.FC = () => {
 
   const getCompMove = (currentGameState: typeof gameState) => {
     fetch(
-      `${getResourceUrl(`/api/${gameState.engine}-move`)}?${new URLSearchParams(
-        {
-          fen: currentGameState.game.fen(),
-          pieceValues: JSON.stringify(currentGameState.pieceValues),
-        }
-      )}`
+      `${getResourceUrl(`/api/sunfish-move`)}?${new URLSearchParams({
+        fen: currentGameState.game.fen(),
+        pieceValues: JSON.stringify(currentGameState.pieceValues),
+      })}`
     )
       .then((response) => {
         return response.json();
@@ -26,6 +25,7 @@ const ChessGame: React.FC = () => {
       .then((compMove) => {
         const newEngineLogs = [...currentGameState.engineLogs, ...compMove.log];
         const newHistory = [...currentGameState.history];
+        const newScore = [...currentGameState.score];
 
         if (compMove.compMove === "resign") {
           newEngineLogs.push("Good game!");
@@ -40,6 +40,7 @@ const ChessGame: React.FC = () => {
               fen: currentGameState.game.fen(),
               move: currentGameState.game.history().slice(-1)[0],
             });
+            newScore.push(compMove.score);
             if (currentGameState.game.in_checkmate()) {
               newEngineLogs.push("Checkmate!");
             } else if (currentGameState.game.in_check()) {
@@ -51,6 +52,7 @@ const ChessGame: React.FC = () => {
                 history: newHistory,
                 engineLogs: newEngineLogs,
                 playerTurn: true,
+                score: newScore,
               })
             );
           }
@@ -68,6 +70,68 @@ const ChessGame: React.FC = () => {
   return (
     <div id="chess-board">
       <Chessboard
+        pieces={{
+          bQ: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+              }}
+              src="chess_pieces/bqueen.svg"
+              alt="queen"
+            />
+          ),
+          bB: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+              }}
+              src="chess_pieces/bbishop.svg"
+              alt="bishop"
+            />
+          ),
+          bK: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+              }}
+              src="chess_pieces/bking.svg"
+              alt="bking"
+            />
+          ),
+          bN: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+              }}
+              src="chess_pieces/bknight.svg"
+              alt="knight"
+            />
+          ),
+          bR: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+              }}
+              src="chess_pieces/brook.svg"
+              alt="rook"
+            />
+          ),
+          bP: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+              }}
+              src="chess_pieces/bpawn.svg"
+              alt="pawn"
+            />
+          ),
+        }}
         orientation={gameState.playerColor}
         position={gameState.game.fen()}
         onDrop={({ sourceSquare, targetSquare }) => {

@@ -1,31 +1,31 @@
-#classifier {
+#score {
   height: 38.2%;
   margin: 25px 4% 25px 4%;
   border: 1px solid #d6beab;
   border-radius: 7px;
 }
 
-#classifier img {
+#score img {
   height: 40px;
   width: 40px;
   transition: all 0.2s;
   filter: invert(63%) sepia(35%) saturate(307%) hue-rotate(343deg) brightness(99%) contrast(86%);
 }
-#classifier img.robot {
+#score img.robot {
   height: 32px;
   width: 32px;
 }
-#classifier-scale-wrapper:hover img {
+#score-scale-wrapper:hover img {
   filter: invert(68%) sepia(45%) saturate(301%) hue-rotate(343deg) brightness(78%) contrast(89%);
 }
 
-#classifier-scale-wrapper {
+#score-scale-wrapper {
   display: flex;
   justify-content: space-around;
-  margin: 30px 0 30px 0;
+  margin: 30px 0 0 0;
 }
 
-#classifier-scale {
+#score-scale {
   width: calc(100% - 100px);
   border: 1px solid #d6beab;
   border-radius: 10px;
@@ -38,16 +38,23 @@
   transition: all 0.5s;
   transform-origin: left;
 }
-
-#analyze-button {
-  border-radius: 5px;
-  background-color: #caa98f;
-  color: white;
-  transition: all 0.2s;
-  padding: 20px 60px;
-  margin: 10px auto;
-  font-size: 1.5em;
+#chart-wrapper {
+height: 63%;
+display: flex;
+align-items: center;
+padding: 0 50px;
 }
-#analyze-button:hover {
-  background-color: #b68d6e;
+#chart-midline {
+  background: repeating-linear-gradient(
+  90deg,
+  #caa98f,
+  #caa98f 10px,
+  transparent 10px,
+  transparent 20px
+);
+  height: 2px;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  bottom: 94px;
 }

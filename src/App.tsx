@@ -17,7 +17,7 @@ const App: React.FC = () => {
             navbar: true,
             gameControls: true,
             engine: true,
-            classifier: true,
+            score: true,
             engineLogs: false,
             records: width < 1600,
           }}
@@ -35,7 +35,7 @@ const App: React.FC = () => {
                   navbar: false,
                   gameControls: false,
                   engine: false,
-                  classifier: false,
+                  score: false,
                   engineLogs: true,
                   records: true,
                 }}
@@ -54,7 +54,7 @@ const App: React.FC = () => {
           navbar: true,
           gameControls: true,
           engine: true,
-          classifier: true,
+          score: true,
           engineLogs: true,
           records: true,
         }}

@@ -19,7 +19,7 @@ export const useViewport = (): { width: number; height: number } => {
 
 export const getResourceUrl = (resource: string): string =>
   process.env.NODE_ENV === "production"
-    ? resource
+    ? `/chess${resource}`
     : `http://localhost:5000${resource}`;
 
 export const startingFen =

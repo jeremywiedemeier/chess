@@ -1,9 +1,10 @@
 # env FLASK_APP=/projects/chess/server/main.py env FLASK_ENV=development python -m flask run
+# waitress-serve --listen=0.0.0.0:5000 wsgi:app
+
 import copy
 import json
 import time
 
-import chess.engine
 from flask import Flask, request
 from flask_cors import CORS
 
@@ -18,19 +19,20 @@ depth = 1000
 movetime = -1
 our_time, opp_time = 1000, 1000  # centi-seconds
 
-engine = chess.engine.SimpleEngine.popen_uci("lc0/lc0")
+
+# engine = chess.engine.SimpleEngine.popen_uci("lc0/lc0.exe")
 
 
-@app.route('/api/maia-move')
-def maia_move():
-    if request.args.get("fen"):
-        board = chess.Board(request.args.get("fen"))
-        play = engine.play(board, chess.engine.Limit(nodes=1), info=chess.engine.INFO_ALL)
-        log = 'maia1500: depth {} score cp {} time {} nodes {}'.format(play.info["depth"], play.info["score"].relative,
-                                                                       play.info["time"],
-                                                                       play.info["nodes"])
-        return {"compMove": play.move.uci(), "log": [log]}, 200
-    return "No FEN :(", 400
+# @app.route('/api/maia-move')
+# def maia_move():
+#     if request.args.get("fen"):
+#         board = chess.Board(request.args.get("fen"))
+#         play = engine.play(board, chess.engine.Limit(nodes=1), info=chess.engine.INFO_ALL)
+#         log = 'maia1500: depth {} score cp {} time {} nodes {}'.format(play.info["depth"], play.info["score"].relative,
+#                                                                        play.info["time"],
+#                                                                        play.info["nodes"])
+#         return {"compMove": play.move.uci(), "log": [log]}, 200
+#     return "No FEN :(", 400
 
 
 @app.route('/api/sunfish-move')
@@ -84,7 +86,7 @@ def comp_move():
             score = int(round((entry.lower + entry.upper) / 2))
             usedtime = int((time.time() - start) * 1000)
             moves_str = moves if len(moves) < 15 else ''
-            log.append('sunfish: depth {} score cp {} time {} nodes {} pv {}'.format(sdepth, score, usedtime,
+            log.append('depth {} score cp {} time {} nodes {} pv {}'.format(sdepth, score, usedtime,
                                                                                      searcher.nodes, moves_str))
 
             if 0 < movetime < (time.time() - start) * 1000:
@@ -99,10 +101,10 @@ def comp_move():
         entry = searcher.tp_score.get((pos, sdepth, True))
         m, s = searcher.tp_move.get(pos), entry.lower
         if s == -MATE_UPPER:
-            return {"compMove": "resign", "log": log}, 200
+            return {"compMove": "resign", "log": log, "score": int(round((entry.lower + entry.upper) / 2))}, 200
         else:
             moves = moves.split(' ')
-            return {"compMove": moves[0], "log": log}, 200
+            return {"compMove": moves[0], "log": log, "score": int(round((entry.lower + entry.upper) / 2))}, 200
 
     else:
         return "400: No FEN string :(", 400

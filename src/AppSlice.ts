@@ -23,7 +23,7 @@ const initialState: AppState = {
   },
   chess: {
     game: new Chess(),
-    engine: "maia",
+    score: [],
     playerColor: initialPlayerColor,
     pieceValues: defaultPieceValues,
     playerTurn: initialPlayerColor === "white",
