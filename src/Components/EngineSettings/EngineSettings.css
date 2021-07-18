@@ -1,6 +1,7 @@
 #engine-settings {
   height: calc(26% - 51px);
-  margin: 25px 4%;
+  margin: 25px auto;
+  width: calc(100% - 20px);
   border: 1px solid #d6beab;
   border-radius: 7px;
   display: flex;
@@ -33,6 +34,7 @@
   border-radius: 3px;
   text-align: center;
   font-family: monospace;
+  font-size: 1.1em;
   color: #ad8566;
 }
 .piece-value-wrapper input:focus {

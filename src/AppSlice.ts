@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { defaultPieceValues } from "./resources";
 // eslint-disable-next-line import/no-cycle

@@ -4,8 +4,9 @@
   align-items: center;
   justify-content: space-evenly;
   border-radius: 7px;
-  height: calc(30% - 51px);
-  margin: 10px 4% 0 4%;
+  height: calc(33% - 51px);
+  margin: 10px auto;
+  width: calc(100% - 20px);
   border: 1px solid #d6beab;
 }
 #game-controls img {

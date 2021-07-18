@@ -3,9 +3,8 @@ import "./EngineLogs.css";
 
 const EngineLogs: React.FC<Props> = ({ engineLogs }: Props) => {
   useEffect(() => {
-    document
-      .querySelector("#engine-logs p:last-child")
-      ?.scrollIntoView({ block: "end" });
+    const logs = document.querySelector("#engine-logs");
+    if (logs) logs.scrollTop = logs.scrollHeight;
   });
 
   return (

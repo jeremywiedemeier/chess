@@ -9,9 +9,8 @@ import "./GameRecord.css";
 const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    document
-      .querySelector(".record-cell:last-child")
-      ?.scrollIntoView({ block: "end" });
+    const records = document.querySelector("#game-record");
+    if (records) records.scrollTop = records.scrollHeight;
   });
   return (
     <div id="record-wrapper">

@@ -8,17 +8,16 @@
   }
 }
 
-
-
 #engine-logs {
-  height: calc(36% - 43px);
-  width: calc(100% - 60px);
+  height: calc(36% - 33px);
+  width: calc(100% - 40px);
   border: 1px solid #b68d6e;
-  margin: 20px auto;
+  margin: 0 auto 20px auto;
   background-color: #fffcf9;
   color: #ad8566;
   padding: 10px;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 #engine-logs::-webkit-scrollbar {

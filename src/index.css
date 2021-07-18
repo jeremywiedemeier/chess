@@ -17,7 +17,7 @@ body, html, #root {
   width: 100%;
   background-color: #fffcf9;
   color: #000;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, p, button, input, span, div, a {
@@ -35,4 +35,10 @@ button {
   border: 2px solid transparent;
   background-color: transparent;
   cursor: pointer;
+}
+
+.module-title {
+  text-align: center;
+  color: #ad8566;
+  font-size: 1.17em;
 }

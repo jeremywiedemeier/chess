@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useEffect } from "react";
 import Chessboard from "chessboardjsx";
 import "./ChessGame.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,13 +59,15 @@ const ChessGame: React.FC = () => {
         }
       });
   };
-
-  if (
-    gameState.game.fen() === startingFen &&
-    gameState.playerColor === "black"
-  ) {
-    getCompMove(gameState);
-  }
+  useEffect(() => {
+    if (
+      gameState.game.fen() === startingFen &&
+      gameState.playerColor === "black"
+    ) {
+      getCompMove(gameState);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState]);
 
   return (
     <div id="chess-board">
@@ -76,6 +78,7 @@ const ChessGame: React.FC = () => {
               style={{
                 width: squareWidth,
                 height: squareWidth,
+                touchAction: "none",
               }}
               src="chess_pieces/bqueen.svg"
               alt="queen"
@@ -86,6 +89,7 @@ const ChessGame: React.FC = () => {
               style={{
                 width: squareWidth,
                 height: squareWidth,
+                touchAction: "none",
               }}
               src="chess_pieces/bbishop.svg"
               alt="bishop"
@@ -96,6 +100,7 @@ const ChessGame: React.FC = () => {
               style={{
                 width: squareWidth,
                 height: squareWidth,
+                touchAction: "none",
               }}
               src="chess_pieces/bking.svg"
               alt="bking"
@@ -106,6 +111,7 @@ const ChessGame: React.FC = () => {
               style={{
                 width: squareWidth,
                 height: squareWidth,
+                touchAction: "none",
               }}
               src="chess_pieces/bknight.svg"
               alt="knight"
@@ -116,6 +122,7 @@ const ChessGame: React.FC = () => {
               style={{
                 width: squareWidth,
                 height: squareWidth,
+                touchAction: "none",
               }}
               src="chess_pieces/brook.svg"
               alt="rook"
@@ -126,8 +133,75 @@ const ChessGame: React.FC = () => {
               style={{
                 width: squareWidth,
                 height: squareWidth,
+                touchAction: "none",
               }}
               src="chess_pieces/bpawn.svg"
+              alt="pawn"
+            />
+          ),
+          wQ: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+                touchAction: "none",
+              }}
+              src="chess_pieces/queen.svg"
+              alt="queen"
+            />
+          ),
+          wB: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+                touchAction: "none",
+              }}
+              src="chess_pieces/bishop.svg"
+              alt="bishop"
+            />
+          ),
+          wK: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+                touchAction: "none",
+              }}
+              src="chess_pieces/king.svg"
+              alt="bking"
+            />
+          ),
+          wN: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+                touchAction: "none",
+              }}
+              src="chess_pieces/knight.svg"
+              alt="knight"
+            />
+          ),
+          wR: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+                touchAction: "none",
+              }}
+              src="chess_pieces/rook.svg"
+              alt="rook"
+            />
+          ),
+          wP: ({ squareWidth }) => (
+            <img
+              style={{
+                width: squareWidth,
+                height: squareWidth,
+                touchAction: "none",
+              }}
+              src="chess_pieces/pawn.svg"
               alt="pawn"
             />
           ),

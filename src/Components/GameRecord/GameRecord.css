@@ -1,11 +1,13 @@
 #record-wrapper {
   border: 1px solid #d6beab;
   border-radius: 7px;
-  margin: 20px;
-  height: calc(64% - 43px);
+  margin: 20px auto;
+  width: calc(100% - 20px);
+  height: calc(67% - 33px);
 }
 
 #game-record {
+  scroll-behavior: smooth;
   display: flex;
   width: calc(100% - 20px);
   padding: 0 0 0 10px;
