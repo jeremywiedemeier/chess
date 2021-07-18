@@ -15,7 +15,7 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
   return (
     <div id="game-controls">
       <div id="control-wrapper">
-        <div style={{ right: "25px" }}>
+        <div className="control-label">
           <img className="reset" alt="reset game" src="reset.png" />
           <button
             type="button"
@@ -30,7 +30,7 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
             Reset
           </button>
         </div>
-        <div style={{ right: "5px" }}>
+        <div className="control-label">
           <img className="suggest" alt="suggest move" src="monitor.png" />
           <button
             type="button"

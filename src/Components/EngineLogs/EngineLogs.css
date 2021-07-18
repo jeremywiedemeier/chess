@@ -11,10 +11,10 @@
 
 
 #engine-logs {
-  height: 200px;
+  height: calc(36% - 43px);
   width: calc(100% - 60px);
   border: 1px solid #b68d6e;
-  margin: 20px 20px 0 20px;
+  margin: 20px auto;
   background-color: #fffcf9;
   color: #ad8566;
   padding: 10px;

@@ -6,21 +6,7 @@ const Score: React.FC<Props> = ({ score }: Props) => {
   return (
     <div id="score">
       <h3 className="module-title">Evaluation</h3>
-      <div id="score-scale-wrapper">
-        <img alt="human" src="human.png" />
-        <div id="score-scale">
-          <div
-            id="scale-data"
-            style={{
-              transform: `translateX(100%) scaleX(${Math.min(
-                Math.max((score.slice(-1)[0] || 0) / 5, -100),
-                100
-              )}%)`,
-            }}
-          />
-        </div>
-        <img alt="robot" className="robot" src="robot2.png" />
-      </div>
+
       <div id="chart-wrapper">
         <Line
           type="line"
@@ -38,6 +24,7 @@ const Score: React.FC<Props> = ({ score }: Props) => {
             ],
           }}
           options={{
+            maintainAspectRatio: false,
             plugins: {
               legend: { display: false },
               tooltip: { enabled: false },
@@ -68,8 +55,23 @@ const Score: React.FC<Props> = ({ score }: Props) => {
             },
           }}
         />
+        <div id="chart-midline" />
       </div>
-      <div id="chart-midline" />
+      <div id="score-scale-wrapper">
+        <img alt="human" src="human.png" />
+        <div id="score-scale">
+          <div
+            id="scale-data"
+            style={{
+              transform: `translateX(100%) scaleX(${Math.min(
+                Math.max((score.slice(-1)[0] || 0) / 5, -100),
+                100
+              )}%)`,
+            }}
+          />
+        </div>
+        <img alt="robot" className="robot" src="robot2.png" />
+      </div>
     </div>
   );
 };

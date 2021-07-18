@@ -1,21 +1,25 @@
 #flex-wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   height: 100%;
+  width: 100%;
 }
 #chess-game-wrapper {
-  flex: 2;
   padding: 10px;
 }
 #menu-wrapper {
-  flex: 1 0 100px;
+  flex: 1 0;
   padding: 0 5px;
-  display: flex;
+  height: calc(100vh - 20px);
+  max-height: 780px;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  background-color: white;
 }
 
 .module-title {
   text-align: center;
-  margin: 15px 0;
   color: #ad8566;
   font-size: 1.17em;
 }

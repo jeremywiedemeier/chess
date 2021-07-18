@@ -1,8 +1,21 @@
 #score {
-  height: 38.2%;
+  height: calc(38% - 51px);
   margin: 25px 4% 25px 4%;
+  padding: 15px 0;
   border: 1px solid #d6beab;
   border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#score .module-title {
+  flex: 0 1 30px;
+}
+@media screen and ( max-height: 700px ) {
+  #score .module-title {
+    display: none;
+  }
 }
 
 #score img {
@@ -19,42 +32,49 @@
   filter: invert(68%) sepia(45%) saturate(301%) hue-rotate(343deg) brightness(78%) contrast(89%);
 }
 
+@media screen and ( max-height: 600px ) {
+  #score #score-scale-wrapper {
+    display: none;
+  }
+}
+
 #score-scale-wrapper {
   display: flex;
   justify-content: space-around;
-  margin: 30px 0 0 0;
+  flex: 0 1 70px;
+  align-items: center;
 }
 
 #score-scale {
-  width: calc(100% - 100px);
+  width: calc(100% - 120px);
   border: 1px solid #d6beab;
   border-radius: 10px;
+  height: 40px;
 }
 #scale-data {
   height: 100%;
   width: 50%;
   background-color: #caa98f;
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   transition: all 0.5s;
   transform-origin: left;
 }
 #chart-wrapper {
-height: 63%;
-display: flex;
-align-items: center;
+height: 146px;
 padding: 0 50px;
+flex: 0 0 146px;
 }
 #chart-midline {
   background: repeating-linear-gradient(
-  90deg,
-  #caa98f,
-  #caa98f 10px,
-  transparent 10px,
-  transparent 20px
-);
-  height: 2px;
-  width: 80%;
+    90deg,
+    #caa98f,
+    #caa98f 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  min-height: 2px;
+  min-width: 80%;
   margin: 0 auto;
   position: relative;
-  bottom: 94px;
+  bottom: 90px;
 }

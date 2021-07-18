@@ -46,11 +46,15 @@ const EngineSettings: React.FC<Props> = ({ gameState }: Props) => {
       }}
     />
   );
-
   return (
     <div id="engine-settings">
-      <h3 className="module-title">Piece Values</h3>
-      <div className="piece-value-wrapper">
+      <h3 className="module-title" style={{ flex: "0 1 20px", minHeight: "0" }}>
+        Piece Values
+      </h3>
+      <div
+        className="piece-value-wrapper"
+        style={{ flex: "0 1 45px", minHeight: "0" }}
+      >
         {chessPieces.map((piece) => (
           <img
             key={piece}
@@ -59,7 +63,10 @@ const EngineSettings: React.FC<Props> = ({ gameState }: Props) => {
           />
         ))}
       </div>
-      <div className="piece-value-wrapper">
+      <div
+        className="piece-value-wrapper"
+        style={{ flex: "0 1 25px", minHeight: "0" }}
+      >
         {chessPieces.map((piece) => generatePieceValueInput(piece))}
       </div>
     </div>

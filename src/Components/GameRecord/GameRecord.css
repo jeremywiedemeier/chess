@@ -2,34 +2,41 @@
   border: 1px solid #d6beab;
   border-radius: 7px;
   margin: 20px;
+  height: calc(64% - 43px);
 }
 
 #game-record {
   display: flex;
-  max-height: 440px;
-  width: 100%;
+  width: calc(100% - 20px);
+  padding: 0 0 0 10px;
   max-width: 410px;
   min-width: 153px;
   margin: 10px auto;
   flex-wrap: wrap;
   overflow-y: scroll;
+  align-content: flex-start;
+  height: calc(100% - 60px);
 }
 .label-wrapper {
-  width: 200px;
-  position: relative;
-  margin: 15px auto 15px auto;
+  margin: 10px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: (100% - 20px);
 }
 .label-wrapper img {
-  position: absolute;
-  left: -13px;
-  top: -5px;
   height: 35px;
   width: 35px;
   filter: invert(79%) sepia(38%) saturate(258%) hue-rotate(343deg) brightness(85%) contrast(85%);
   transition: all 0.2s;
+  flex: 0 0 35px;
 }
 .label-wrapper:hover img {
   filter: invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
+}
+.label-wrapper h3 {
+  flex: 0 1 150px;
+  min-width: 118px;
 }
 
 .record-cell {

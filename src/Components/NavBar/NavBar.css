@@ -10,12 +10,12 @@
 #navbar button {
   color: #b68d6e;
   transition: all 0.3s;
-  width: 30%;
-  height: 40px;
-  border-left: 2px solid #caa98f;
+  width: 20%;
+  height: 60px;
+  border-bottom: 2px solid #caa98f;
 }
 #navbar > a {
-  width: 30%;
+  width: 20%;
 }
 #navbar > a > button {
   width: 100%;
@@ -24,15 +24,32 @@
 }
 
 #navbar button:hover, #navbar button:focus {
-  border-left: 2px solid #b68d6e;
+  border-bottom: 2px solid #b68d6e;
   color: #8b6141;
 }
-#navbar button.dark {
-  border-radius: 5px;
-  background-color: #caa98f;
-  color: white;
+#navbar button > img {
+  height: 35px;
+  width: 35px;
+  filter: invert(78%) sepia(16%) saturate(553%) hue-rotate(344deg) brightness(87%) contrast(91%);
+  transition: all 0.15s;
 }
-#navbar button.dark:hover, #navbar button.dark:focus {
-  background-color: #b68d6e;
-  border-color: transparent;
+#navbar button:hover > img {
+  filter: invert(60%) sepia(14%) saturate(923%) hue-rotate(343deg) brightness(96%) contrast(90%);
+}
+#navbar a > button:hover > img, #navbar a:focus > button > img {
+  opacity: 0;
+}
+
+#navbar a button > span {
+  position: absolute;
+  font-size: 1.2em;
+  bottom: 18px;
+  opacity: 0;
+  transition: all 0.15s;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#navbar a button:hover > span, #navbar a:focus button > span {
+  opacity: 1;
 }

@@ -6,7 +6,7 @@ import { startingFen } from "../../resources";
 import { GameState } from "../../types";
 import "./GameRecord.css";
 
-const GameRecord: React.FC<Props> = ({ gameState, shorten }: Props) => {
+const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     document
@@ -14,12 +14,12 @@ const GameRecord: React.FC<Props> = ({ gameState, shorten }: Props) => {
       ?.scrollIntoView({ block: "end" });
   });
   return (
-    <div id="record-wrapper" style={{ height: "63.4%" }}>
+    <div id="record-wrapper">
       <div className="label-wrapper">
         <img alt="recall" src="recall.png" />
         <h3 className="module-title">Recall Position</h3>
       </div>
-      <div id="game-record" style={{ maxHeight: shorten ? "35.9%" : "440px" }}>
+      <div id="game-record">
         {gameState.history.map((record, i) => {
           return (
             <button
@@ -62,7 +62,6 @@ const GameRecord: React.FC<Props> = ({ gameState, shorten }: Props) => {
 
 interface Props {
   gameState: GameState;
-  shorten: boolean;
 }
 
 export default GameRecord;

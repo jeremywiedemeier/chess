@@ -17,6 +17,7 @@ body, html, #root {
   width: 100%;
   background-color: #fffcf9;
   color: #000;
+  overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, p, button, input, span, div, a {
