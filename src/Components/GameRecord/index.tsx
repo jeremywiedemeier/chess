@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setGameState } from "../../AppSlice";
 import { startingFen } from "../../resources";
 import { GameState } from "../../types";
+import recall from "./recall.png";
 import "./GameRecord.css";
 
 const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
@@ -15,7 +16,7 @@ const GameRecord: React.FC<Props> = ({ gameState }: Props) => {
   return (
     <div id="record-wrapper">
       <div className="label-wrapper">
-        <img alt="recall" src="recall.png" />
+        <img alt="recall" src={recall} />
         <h3 className="module-title">Recall Position</h3>
       </div>
       <div id="game-record">

@@ -9,6 +9,11 @@
   flex-direction: column;
   justify-content: space-between;
 }
+@media screen and ( max-height: 600px ) {
+  #score {
+    border: none;
+  }
+}
 
 #score .module-title {
   flex: 0 1 30px;
@@ -33,17 +38,17 @@
   filter: invert(68%) sepia(45%) saturate(301%) hue-rotate(343deg) brightness(78%) contrast(89%);
 }
 
-@media screen and ( max-height: 600px ) {
-  #score #score-scale-wrapper {
-    display: none;
-  }
-}
-
 #score-scale-wrapper {
   display: flex;
   justify-content: space-around;
   flex: 0 1 70px;
   align-items: center;
+}
+
+@media screen and ( max-height: 500px ) {
+  #score-scale-wrapper {
+    display: none;
+  }
 }
 
 #score-scale {

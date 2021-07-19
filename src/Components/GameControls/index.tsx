@@ -4,6 +4,9 @@ import { useDispatch } from "react-redux";
 import { resetGame } from "../../AppSlice";
 import { getResourceUrl } from "../../resources";
 import { GameState } from "../../types";
+import reset from "./reset.png";
+import monitor from "./monitor.png";
+import sides from "./sides.png";
 import "./GameControls.css";
 
 const GameControls: React.FC<Props> = ({ gameState }: Props) => {
@@ -16,7 +19,7 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
     <div id="game-controls">
       <div id="control-wrapper">
         <div className="control-label">
-          <img className="reset" alt="reset game" src="reset.png" />
+          <img className="reset" alt="reset game" src={reset} />
           <button
             type="button"
             onClick={() => {
@@ -31,7 +34,7 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
           </button>
         </div>
         <div className="control-label">
-          <img className="suggest" alt="suggest move" src="monitor.png" />
+          <img className="suggest" alt="suggest move" src={monitor} />
           <button
             type="button"
             id="comp-suggestion"
@@ -59,7 +62,7 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
       </div>
 
       <div id="sides-wrapper">
-        <img alt="change sides" src="sides.png" />
+        <img alt="change sides" src={sides} />
         <button
           type="button"
           onClick={() => {

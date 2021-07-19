@@ -5,10 +5,17 @@
   justify-content: space-evenly;
   border-radius: 7px;
   height: calc(33% - 51px);
+  min-height: 80px;
   margin: 10px auto;
   width: calc(100% - 20px);
   border: 1px solid #d6beab;
 }
+@media screen and ( max-height: 600px ) {
+  #game-controls {
+    border: none;
+  }
+}
+
 #game-controls img {
   height: 35px;
   width: 35px;

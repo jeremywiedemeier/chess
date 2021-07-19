@@ -1,0 +1,37 @@
+body, html, #root {
+  background-color: #222;
+}
+
+#engine-logs {
+  background-color: #222;
+}
+
+
+::-webkit-scrollbar-thumb {
+  border-left: 3px solid #222;
+}
+
+.sides-label.active {
+  color: #222;
+}
+
+.record-cell:nth-child(even) {
+  color: #d6beab;
+  background-color: transparent;
+  border-left: initial;
+  border-right: 2px solid #caa98f;
+}
+.record-cell:nth-child(even):hover, .record-cell:nth-child(even):focus {
+  border-right: 2px solid #b68d6e;
+  color: #b68d6e;
+  background-color: transparent;
+}
+
+.record-cell:nth-child(odd) {
+  background-color: #caa98f;
+  color: #222;
+  border-left: initial;
+}
+.record-cell:nth-child(odd):hover, .record-cell:nth-child(odd):focus {
+  background-color: #c4a187;
+}

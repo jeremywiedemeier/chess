@@ -20,7 +20,7 @@ const initialPlayerColor = Math.random() > 0.5 ? "white" : "black";
 
 const initialState: AppState = {
   UI: {
-    darkTheme: false,
+    darkTheme: true,
   },
   chess: {
     game: new Chess(),
@@ -37,8 +37,8 @@ export const AppSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    updateUI: (state: AppState, action: PayloadAction<AppState["UI"]>) => {
-      state.UI = action.payload;
+    toggleTheme: (state: AppState) => {
+      state.UI.darkTheme = !state.UI.darkTheme;
     },
     setGameState: (
       state: AppState,
@@ -65,7 +65,7 @@ export const AppSlice = createSlice({
 });
 
 export const {
-  updateUI,
+  toggleTheme,
   setGameState,
   resetGame,
   setPieceValues,

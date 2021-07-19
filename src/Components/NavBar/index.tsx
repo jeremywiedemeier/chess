@@ -1,13 +1,20 @@
 import React from "react";
 import "./NavBar.css";
+import { useDispatch } from "react-redux";
+import brain from "./brain.png";
+import bulb from "./bulb.png";
+import code from "./code.png";
+import home from "./home.png";
+import { toggleTheme } from "../../AppSlice";
 
 const NavBar: React.FC = () => {
+  const dispatch = useDispatch();
   return (
     <div id="navbar">
       <a href="https://jeremywiedemeier.com/">
         <button type="button" tabIndex={-1}>
           <img
-            src="home.png"
+            src={home}
             alt="home"
             style={{ margin: "3px 0 0 0", height: "32px", width: "32px" }}
           />
@@ -20,7 +27,7 @@ const NavBar: React.FC = () => {
         rel="noopener noreferrer"
       >
         <button type="button" tabIndex={-1}>
-          <img src="code.png" alt="code" />
+          <img src={code} alt="code" />
           <span>Code</span>
         </button>
       </a>
@@ -30,13 +37,19 @@ const NavBar: React.FC = () => {
         rel="noopener noreferrer"
       >
         <button type="button" tabIndex={-1}>
-          <img src="brain.png" alt="brain" />
+          <img src={brain} alt="brain" />
           <span>Engine</span>
         </button>
       </a>
-      <button type="button">
+      <button
+        type="button"
+        onClick={() => {
+          (document.getElementById("light-switch") as HTMLAudioElement)?.play();
+          dispatch(toggleTheme());
+        }}
+      >
         <img
-          src="bulb.png"
+          src={bulb}
           style={{ margin: "3px 0 0 0", height: "32px", width: "32px" }}
           alt="bulb"
         />

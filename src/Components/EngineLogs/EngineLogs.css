@@ -18,6 +18,7 @@
   padding: 10px;
   overflow-y: scroll;
   scroll-behavior: smooth;
+  transition: background-color 0.2s;
 }
 
 #engine-logs::-webkit-scrollbar {

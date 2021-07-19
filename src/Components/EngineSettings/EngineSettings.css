@@ -1,5 +1,6 @@
 #engine-settings {
   height: calc(26% - 51px);
+  min-height: 68px;
   margin: 25px auto;
   width: calc(100% - 20px);
   border: 1px solid #d6beab;
@@ -11,6 +12,11 @@
 @media screen and ( max-height: 700px ) {
   #engine-settings .module-title {
     display: none;
+  }
+}
+@media screen and ( max-height: 600px ) {
+  #engine-settings {
+    border: none;
   }
 }
 #engine-settings img {
@@ -36,6 +42,7 @@
   font-family: monospace;
   font-size: 1.1em;
   color: #ad8566;
+  background-color: transparent;
 }
 .piece-value-wrapper input:focus {
   border: 1px solid #ad8566;

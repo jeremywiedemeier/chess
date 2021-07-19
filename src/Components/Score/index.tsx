@@ -1,5 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import human from "./human.png";
+import robot from "./robot.png";
 import "./Score.css";
 
 const Score: React.FC<Props> = ({ score }: Props) => {
@@ -58,7 +60,7 @@ const Score: React.FC<Props> = ({ score }: Props) => {
         <div id="chart-midline" />
       </div>
       <div id="score-scale-wrapper">
-        <img alt="human" src="human.png" />
+        <img alt="human" src={human} />
         <div id="score-scale">
           <div
             id="scale-data"
@@ -70,7 +72,7 @@ const Score: React.FC<Props> = ({ score }: Props) => {
             }}
           />
         </div>
-        <img alt="robot" className="robot" src="robot2.png" />
+        <img alt="robot" className="robot" src={robot} />
       </div>
     </div>
   );

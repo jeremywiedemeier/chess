@@ -6,6 +6,11 @@
   height: calc(67% - 33px);
 }
 
+@media screen and ( max-height: 600px ) {
+  #record-wrapper {
+    border: none;
+  }
+}
 #game-record {
   scroll-behavior: smooth;
   display: flex;

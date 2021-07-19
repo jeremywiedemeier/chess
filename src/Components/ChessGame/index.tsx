@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Chessboard from "chessboardjsx";
 import "./ChessGame.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGameState, setGameState } from "../../AppSlice";
+import { selectGameState, selectUI, setGameState } from "../../AppSlice";
 import { getResourceUrl, startingFen } from "../../resources";
 
 const maxBoardWidth = 800;
@@ -11,6 +11,7 @@ const maxBoardWidth = 800;
 const ChessGame: React.FC = () => {
   const dispatch = useDispatch();
   const gameState = useSelector(selectGameState);
+  const { darkTheme } = useSelector(selectUI);
 
   const getCompMove = (currentGameState: typeof gameState) => {
     fetch(
@@ -46,6 +47,28 @@ const ChessGame: React.FC = () => {
             } else if (currentGameState.game.in_check()) {
               newEngineLogs.push("Check!");
             }
+
+            if (currentGameState.game.history().slice(-1)[0].includes("x")) {
+              const pieceCapture = document.getElementById(
+                "piece-capture"
+              ) as HTMLAudioElement;
+              if (pieceCapture) {
+                setTimeout(() => {
+                  pieceCapture.play();
+                }, 500);
+              }
+            } else {
+              const piecedrop = document.getElementById(
+                "piece-drop"
+              ) as HTMLAudioElement;
+              if (piecedrop) {
+                piecedrop.volume = 0.4;
+                setTimeout(() => {
+                  piecedrop.play();
+                }, 500);
+              }
+            }
+
             dispatch(
               setGameState({
                 ...currentGameState,
@@ -227,6 +250,23 @@ const ChessGame: React.FC = () => {
                   },
                 ],
               };
+
+              if (gameState.game.history().slice(-1)[0].includes("x")) {
+                const pieceCapture = document.getElementById(
+                  "piece-capture"
+                ) as HTMLAudioElement;
+                if (pieceCapture) {
+                  pieceCapture.play();
+                }
+              } else {
+                const piecedrop = document.getElementById(
+                  "piece-drop"
+                ) as HTMLAudioElement;
+                if (piecedrop) {
+                  piecedrop.volume = 0.4;
+                  piecedrop.play();
+                }
+              }
               dispatch(setGameState(currentGameState));
               getCompMove(currentGameState);
             }
@@ -242,9 +282,19 @@ const ChessGame: React.FC = () => {
           boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
           margin: "0 auto",
         }}
-        darkSquareStyle={{ backgroundColor: "#caa98f" }}
-        lightSquareStyle={{ backgroundColor: "#f9eadd" }}
-        dropSquareStyle={{ boxShadow: "inset 0 0 1px 4px #BE9474" }}
+        darkSquareStyle={{
+          backgroundColor: darkTheme ? "#8b6141" : "#caa98f",
+          transition: "background-color 0.2s",
+        }}
+        lightSquareStyle={{
+          backgroundColor: darkTheme ? "#b68d6e" : "#f9eadd",
+          transition: "background-color 0.2s",
+        }}
+        dropSquareStyle={{
+          boxShadow: darkTheme
+            ? "inset 0 0 1px 4px #754b2a"
+            : "inset 0 0 1px 4px #BE9474",
+        }}
       />
     </div>
   );

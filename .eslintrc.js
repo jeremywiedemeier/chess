@@ -31,6 +31,7 @@ module.exports = {
   rules: {
     'linebreak-style': 'off',
     'import/prefer-default-export': 'off',
+    'jsx-a11y/media-has-caption': 'off',
     'prettier/prettier': [
       'error',
       {
