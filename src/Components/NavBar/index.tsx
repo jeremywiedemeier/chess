@@ -44,7 +44,13 @@ const NavBar: React.FC = () => {
       <button
         type="button"
         onClick={() => {
-          (document.getElementById("light-switch") as HTMLAudioElement)?.play();
+          const lightSwitch = document.getElementById(
+            "light-switch"
+          ) as HTMLAudioElement;
+          if (lightSwitch) {
+            lightSwitch.volume = 0.7;
+            lightSwitch.play();
+          }
           dispatch(toggleTheme());
         }}
       >

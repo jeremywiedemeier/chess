@@ -44,12 +44,12 @@ def comp_move():
         try:
             unvalidated_piece_values = json.loads(request.args.get("pieceValues"))
 
-            piece_values["P"] = max(min(int(unvalidated_piece_values["pawn"]), 99999), 1)
-            piece_values["N"] = max(min(int(unvalidated_piece_values["knight"]), 99999), 1)
-            piece_values["B"] = max(min(int(unvalidated_piece_values["bishop"]), 99999), 1)
-            piece_values["R"] = max(min(int(unvalidated_piece_values["rook"]), 99999), 1)
-            piece_values["Q"] = max(min(int(unvalidated_piece_values["queen"]), 99999), 1)
-            piece_values["K"] = max(min(int(unvalidated_piece_values["king"]), 99999), 1)
+            piece_values["P"] = max(min(int(unvalidated_piece_values["pawn"]), 1000), 1)
+            piece_values["N"] = max(min(int(unvalidated_piece_values["knight"]), 1000), 1)
+            piece_values["B"] = max(min(int(unvalidated_piece_values["bishop"]), 1000), 1)
+            piece_values["R"] = max(min(int(unvalidated_piece_values["rook"]), 1000), 1)
+            piece_values["Q"] = max(min(int(unvalidated_piece_values["queen"]), 1000), 1)
+            piece_values["K"] = max(min(int(unvalidated_piece_values["king"]), 99999), piece_values["Q"] * 8 + 5000)
 
         except (ValueError, json.decoder.JSONDecodeError):
             return "400: Bad piece value :S", 400

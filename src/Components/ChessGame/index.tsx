@@ -28,7 +28,7 @@ const ChessGame: React.FC = () => {
         const newHistory = [...currentGameState.history];
         const newScore = [...currentGameState.score];
 
-        if (compMove.compMove === "resign") {
+        if (compMove.compMove === "resign" || compMove.compMove === "") {
           newEngineLogs.push("Good game!");
         } else {
           const move = currentGameState.game.move({

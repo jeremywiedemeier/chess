@@ -7,6 +7,11 @@ import "./EngineSettings.css";
 
 const chessPieces = Object.keys(defaultPieceValues) as Piece[];
 
+const constrainValue = (val: number, piece: string) => {
+  if (piece === "king") return Math.max(Math.min(val, 99999), 10000);
+  return Math.max(Math.min(val, 1000), 1);
+};
+
 const EngineSettings: React.FC<Props> = ({ gameState }: Props) => {
   const dispatch = useDispatch();
   const [unvalidatedPieceValues, setUnvalidatedPieceValues] = useState<{
@@ -31,14 +36,11 @@ const EngineSettings: React.FC<Props> = ({ gameState }: Props) => {
         const validatedPieceValues = {
           ...unvalidatedPieceValues,
           [piece]:
-            Math.max(
-              Math.min(
-                typeof unvalidatedPieceValues[piece] === "string"
-                  ? parseInt(unvalidatedPieceValues[piece] as string, 10)
-                  : (unvalidatedPieceValues[piece] as number),
-                99999
-              ),
-              1
+            constrainValue(
+              typeof unvalidatedPieceValues[piece] === "string"
+                ? parseInt(unvalidatedPieceValues[piece] as string, 10)
+                : (unvalidatedPieceValues[piece] as number),
+              piece
             ) || defaultPieceValues[piece],
         };
         setUnvalidatedPieceValues(validatedPieceValues);

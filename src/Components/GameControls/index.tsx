@@ -49,9 +49,9 @@ const GameControls: React.FC<Props> = ({ gameState }: Props) => {
                 .then((response) => response.json())
                 .then((compMove) => {
                   setCompSuggestion(
-                    compMove.compMove !== "resign"
-                      ? compMove.compMove
-                      : "..reset?"
+                    compMove.compMove === "resign" || compMove.compMove === ""
+                      ? "..reset?"
+                      : compMove.compMove
                   );
                 });
             }}
